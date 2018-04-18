@@ -40,7 +40,7 @@ def getQuote():
                         print (csv_file.line_num)
                         break
 
-        writeLog(str(row), 1, "w+b")						
+        writeLog(str(row), 1, "a")						
         return row
 
 def readTrumpianTweet():
@@ -58,7 +58,7 @@ def getPast():
 
 	flx.close()
 
-	writeLog("Writing past number: ", int(row), "w+b")
+	writeLog("Writing past number: ", int(row), "w")
 	               
 	return int(row)
 
@@ -72,7 +72,7 @@ def getCurrent(pastNumber):
 
         print("And now we print the Status of the last trump Tweet")
 
-        writeLog("Gotten current: ", 1, "w+b")
+        writeLog("Gotten current: ", 1, "a")
 
         print(St)
         print (St[0].id)
@@ -94,7 +94,7 @@ def postReply(text,currentNumber):
         status = api.PostUpdate(response)
         ##
 
-        writeLog(response, 1, "w+b")
+        writeLog(response, 1, "a")
 
         print(status)
         
@@ -103,14 +103,14 @@ def writePast(ccc):
         flx = open('pastNumber.csv', "w")
         flx.write(str(ccc))
         flx.close()
-        writeLog("writing past: ", int(ccc), "w+b")
+        writeLog("writing past: ", int(ccc), "a")
 
 		
 def writeLog(TweetText, currentNumber, mode):
 
         print("Writing a log...")
         now = datetime.datetime.now()
-        message = str(now)
+        message = "\n"+str(now)
         
         fly = open("writeLog.txt", mode)
         fly.write(message)
@@ -159,5 +159,5 @@ if (currentNumber > pastNumber):
 
 
 	
-writeLog(TweetText[0], currentNumber, "w+b")
+writeLog(TweetText[0], currentNumber, "a")
 
